@@ -10,12 +10,11 @@
 		</aop:aspect>
 	</aop:config>	
  -->
-<bean id="log" class="com.springbook.biz.common.LogAdvice"/>
+<bean id="around" class="com.springbook.biz.common.AroundAdvice"/>
 <aop:config>
 <aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))"/>
-<aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))"/>
-<aop:aspect ref="log">
-<aop:after pointcut-ref="getPointcut" method="printLog"/>
+<aop:aspect ref="around">
+<aop:around pointcut-ref="allPointcut" method="aroundLog"/>
 </aop:aspect>
 </aop:config>
 <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
